@@ -12,8 +12,8 @@ while True:
             todos.append(todo)
         case "show" | "display":
             print(todos)
-            for todo in todos:
-                print(todo)
+            for index, todo in enumerate(todos):
+                print(index, "-", todo)
         case "edit":
             number = int(input("Enter todos number"))
             number = number - 1
