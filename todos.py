@@ -20,6 +20,9 @@ while True:
             number = number - 1
             new_todo = input("Enter updated todo")
             todos[number] = new_todo
+        case "complete":
+            number = int(input("Enter completed number"))
+            todos.pop(number - 1)
         case "exit":
             break
         case _:
