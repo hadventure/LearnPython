@@ -13,6 +13,7 @@ while True:
         case "show" | "display":
             print(todos)
             for index, todo in enumerate(todos):
+                row = f"{index}-item"
                 print(index, "-", todo)
         case "edit":
             number = int(input("Enter todos number"))
