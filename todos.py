@@ -10,7 +10,7 @@ while True:
         case "add":
             todo = input(user_prompt)
             todos.append(todo)
-        case "show":
+        case "show" | "display":
             print(todos)
             for todo in todos:
                 print(todo)
