@@ -20,10 +20,10 @@ while True:
         case "show" | "display":
             file = open("todos.txt", "r")
             todos = file.readlines()
-
-            print(todos)
-
             file.close()
+
+            for index, todo in enumerate(todos):
+                print(f"{index}. {todo}")
         case "edit":
             number = int(input("Enter todos number"))
             number = number - 1
