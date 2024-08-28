@@ -1,4 +1,8 @@
 user_prompt = f"Please enter a todo: \n"
+def get_todos():
+    with open("todos.txt", "a+") as file:
+        todos = file.readlines()
+    return todos
 
 while True:
     user_action = input("Type add, show, edit or exit \n")
@@ -7,18 +11,14 @@ while True:
     if user_action.startswith("add"):
         todo = input(user_prompt)
 
-        with open("todos.txt", "a+") as file:
-            todos = file.readlines()
-
+        todos = get_todos()
         todos.append(f"{todo}\n")
 
         file = open("todos.txt", "a+")
         file.writelines(todos)
         file.close()
     elif user_action.startswith("show"):
-        file = open("todos.txt", "r")
-        todos = file.readlines()
-        file.close()
+        todos = get_todos()
 
         new_todos = []
         new_todos = [item.strip("\n") for item in new_todos]
@@ -29,8 +29,8 @@ while True:
         try:
             number = int(input("Enter todos number"))
             number = number - 1
-            with open('todos.txt', 'r') as file:
-                todos = file.readlines()
+
+            todos = get_todos()
 
             print(todos)
 
@@ -50,8 +50,7 @@ while True:
         try:
             number = int(input("Enter completed number"))
 
-            with open("todos.txt", "r") as file:
-                todos = file.readlines()
+            todos = get_todos()
 
             index = number - 1
             todo_to_remove = todos[index]
