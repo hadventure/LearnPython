@@ -4,8 +4,7 @@ while True:
     user_action = input("Type add, show, edit or exit \n")
     user_action = user_action.strip()
 
-    match user_action:
-        case "add":
+    if "add" in user_action:
             todo = input(user_prompt)
 
             with open("todos.txt", "a+") as file:
@@ -16,7 +15,7 @@ while True:
             file = open("todos.txt", "a+")
             file.writelines(todos)
             file.close()
-        case "show" | "display":
+    elif "show" | "display" in user_action:
             file = open("todos.txt", "r")
             todos = file.readlines()
             file.close()
@@ -26,41 +25,40 @@ while True:
 
             for index, todo in enumerate(todos):
                 print(f"{index}. {todo}")
-        case "edit":
-            number = int(input("Enter todos number"))
-            number = number - 1
-            with open('todos.txt', 'r') as file:
-                todos = file.readlines()
+    elif "edit" in user_action:
+        number = int(input("Enter todos number"))
+        number = number - 1
+        with open('todos.txt', 'r') as file:
+            todos = file.readlines()
 
-            print(todos)
+        print(todos)
 
-            new_todo = input("Enter updated todo" ) + "\n"
+        new_todo = input("Enter updated todo" ) + "\n"
 
-            todos[number] = new_todo
+        todos[number] = new_todo
 
-            print(todos)
+        print(todos)
 
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
-        case "complete":
-            number = int(input("Enter completed number"))
+        with open('todos.txt', 'w') as file:
+            file.writelines(todos)
 
-            with open("todos.txt", "r") as file:
-                todos = file.readlines()
+    elif "complete" in user_action:
+        number = int(input("Enter completed number"))
 
-            index = number - 1
-            todo_to_remove = todos[index]
-            todos.pop(index)
+        with open("todos.txt", "r") as file:
+            todos = file.readlines()
 
-            with open("todos.txt", "w") as file:
-                file.writelines(todos)
+        index = number - 1
+        todo_to_remove = todos[index]
+        todos.pop(index)
 
-            message = f"Todo {todo_to_remove} was removed"
+        with open("todos.txt", "w") as file:
+            file.writelines(todos)
 
+        message = f"Todo {todo_to_remove} was removed"
 
-        case "exit":
-            break
-        case _:
-            print("Invalid input")
-
+    elif "exit" in user_action:
+        break
+    else:
+        print("Invalid input")
 print("Buy")
