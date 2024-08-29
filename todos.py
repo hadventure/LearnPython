@@ -1,8 +1,17 @@
 user_prompt = f"Please enter a todo: \n"
-def get_todos():
-    with open("todos.txt", "a+") as file:
-        todos = file.readlines()
-    return todos
+
+
+def get_todos(filepath):
+    with open(filepath, "a+") as file_local:
+        file_local.seek(0)
+        todos_local = file_local.readlines()
+    return todos_local
+
+
+def write_todos(filepath, todos_arg):
+    with open(filepath, "w") as file:
+        file.writelines(todos_arg)
+
 
 while True:
     user_action = input("Type add, show, edit or exit \n")
@@ -11,37 +20,30 @@ while True:
     if user_action.startswith("add"):
         todo = input(user_prompt)
 
-        todos = get_todos()
+        todos = get_todos("todos.txt")
         todos.append(f"{todo}\n")
 
-        file = open("todos.txt", "a+")
-        file.writelines(todos)
-        file.close()
+        write_todos("todos.txt", todos)
     elif user_action.startswith("show"):
-        todos = get_todos()
+        todos = get_todos("todos.txt")
 
         new_todos = []
-        new_todos = [item.strip("\n") for item in new_todos]
+        new_todos = [item.strip("\n") for item in todos]
 
-        for index, todo in enumerate(todos):
-            print(f"{index}. {todo}")
+        for index, todo in enumerate(new_todos):
+            print(f"{index + 1}. {todo}")
     elif user_action.startswith("edit"):
         try:
             number = int(input("Enter todos number"))
             number = number - 1
 
-            todos = get_todos()
-
-            print(todos)
+            todos = get_todos("todos.txt")
 
             new_todo = input("Enter updated todo") + "\n"
 
             todos[number] = new_todo
 
-            print(todos)
-
-            with open('todos.txt', 'w') as file:
-                file.writelines(todos)
+            write_todos("todos.txt", todos)
         except ValueError:
             print("Command is not valid")
             user_action = input("Type add, show, edit or exit \n")
@@ -50,14 +52,13 @@ while True:
         try:
             number = int(input("Enter completed number"))
 
-            todos = get_todos()
+            todos = get_todos("todos.txt")
 
             index = number - 1
             todo_to_remove = todos[index]
             todos.pop(index)
 
-            with open("todos.txt", "w") as file:
-                file.writelines(todos)
+            write_todos("todos.txt", todos)
 
             message = f"Todo {todo_to_remove} was removed"
         except IndexError:
