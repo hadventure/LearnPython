@@ -1,5 +1,6 @@
 from functions import get_todos, write_todos
 # import functions
+import time
 
 user_prompt = f"Please enter a todo: \n"
 
