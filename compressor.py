@@ -29,5 +29,4 @@ while True:
     make_archive(filepaths, folder)
     window["output"].update("Compression completed.")
 
-window.read()
 window.close()
