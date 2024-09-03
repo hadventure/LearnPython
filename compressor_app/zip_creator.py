@@ -1,6 +1,7 @@
 import zipfile
 import pathlib
 
+
 def make_archive(filepaths, destination_dir):
     dest_path = pathlib.Path(destination_dir, "compressed.zip")
 

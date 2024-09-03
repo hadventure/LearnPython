@@ -6,7 +6,7 @@ sg.theme("System Default 1")
 
 label = sg.Text("Type in a to-do")
 input_box = sg.InputText(tooltip="Enter a to-do", key="todo")
-add_button = sg.Button("Add")
+add_button = sg.Button("Add", size=10)
 list_box = sg.Listbox(values=functions.get_todos(),
                       key="todos",
                       enable_events=True,
@@ -23,7 +23,6 @@ window = sg.Window("App",
 # keeps the window open
 while True:
     event, values = window.read()
-    # window["clock"].update(value=time.strftime("%I:%M:%S %p"))
 
     match event:
         case "Add":
